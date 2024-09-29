@@ -86,8 +86,8 @@
 
         .box {
             margin-bottom: 10px; /* เพิ่มระยะห่างที่นี่ */
-            width: 500px;
-            height: 350px;
+            width: 350px;
+            height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
