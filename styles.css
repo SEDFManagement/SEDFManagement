@@ -2,7 +2,7 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300&family=Prompt:wght@400;500;600&display=swap');
-
+            
         * {
             box-sizing: border-box;
         }
@@ -34,42 +34,73 @@
             position: absolute;
             font-size: 50px;
             color: rgba(0, 0, 0, 0.1);
-            animation: move 8s linear infinite;
+            animation: move 16s linear infinite, spin 16s linear infinite; /* ใช้สองแอนิเมชัน */
         }
-
+        
         @keyframes move {
             0% {
-                transform: translate(0, 0);
+                transform: translate(0, 0); /* ตำแหน่งเริ่มต้น */
             }
             25% {
-                transform: translate(20px, -20px);
+                transform: translate(20px, -20px); /* เคลื่อนที่ไปขวาและขึ้น */
             }
             50% {
-                transform: translate(-20px, 20px);
+                transform: translate(-20px, 20px); /* เคลื่อนที่ไปซ้ายและลง */
             }
             75% {
-                transform: translate(-20px, -20px);
+                transform: translate(-20px, -20px); /* เคลื่อนที่ไปซ้ายและขึ้น */
             }
             100% {
-                transform: translate(20px, 0);
+                transform: translate(20px, 0); /* เคลื่อนที่ไปขวา */
             }
         }
-
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg); /* เริ่มต้นที่ไม่มีการหมุน */
+            }
+            100% {
+                transform: rotate(360deg); /* หมุนครบ 360 องศา */
+            }
+        }
+        
+        
+    
+        @keyframes fadeIn {
+            0% {
+                opacity: 0; /* เริ่มต้นที่ความโปร่งใส 0 */
+                transform: translateY(-20px); /* เคลื่อนที่ขึ้น */
+            }
+            100% {
+                opacity: 1; /* สิ้นสุดที่ความโปร่งใส 1 */
+                transform: translateY(0); /* กลับสู่ตำแหน่งปกติ */
+            }
+        }
+        
         h1 {
-            color: black;
+            color: rgb(3, 65, 73); /* สีปกติ */
             margin-bottom: 5px;
             margin-top: 0;
             position: relative;
             z-index: 1;
             display: flex;
             align-items: center;
+            font-size: 45px; /* ขนาดฟอนต์ */
+            animation: fadeIn 2.5s ease-in-out; /* อนิเมชันการปรากฏ */
+            transition: transform 1.0s ease; /* ทำให้การเปลี่ยนแปลงนุ่มนวล */
         }
-
+        
+        /* เปลี่ยนขนาดเมื่อเอาเมาส์ชี้ */
+        h1:hover {
+            transform: scale(1.1); /* ขยายขนาดขึ้น 10% เมื่อ hover */
+        }
+        
+        
         .container {
             display: flex;
             gap: 45px;
             z-index: 1;
-            margin-top: 10px; /* ปรับที่นี่ */
+            margin-top: 50px; /* ปรับที่นี่ */
             justify-content: center;
         }
 
@@ -77,45 +108,70 @@
             background-color: #006f7d;
             color: white;
             text-align: center;
-            padding: 10px 0;
+            padding: 5px 0;
             width: 100%;
             position: absolute;
             bottom: 0;
             font-size: 14px;
+            height: 10px; /* กำหนดความสูงคงที่ */
         }
+        
 
         .box {
-            margin-bottom: 10px; /* เพิ่มระยะห่างที่นี่ */
-            width: 350px;
-            height: 200px;
+            margin-bottom: 100px; 
+            width: 200px;
+            height: 100px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center; /* จัดตำแหน่งแนวกลางในแนวตั้ง */
+            align-items: center; /* จัดตำแหน่งแนวกลางในแนวนอน */
             background-color: #006f7d;
             color: white;
-            font-size: 24px;
+            font-size: 15px;
             font-weight: 500;
             text-align: center;
             text-decoration: none;
             border-radius: 45px;
-            padding: 20px;
+            padding: 30px; 
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
-
+        
         .box i {
-            font-size: 64px;
+            font-size: 64px; /* ปรับขนาดของไอคอนให้ใหญ่ขึ้น */
+            margin-bottom: 10px; /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
         }
-
-        .footer-text {
-            margin-top: auto;
-            font-size: 24px;
+        
+        .box-web {
+            background-color: #00838f; /* สีพื้นหลังสำหรับ Website กทศ. */
         }
-
+        
+        .box-store {
+            background-color: #02383f; /* สีพื้นหลังสำหรับ ระบบเบิกจ่ายวัสดุ-อุปกรณ์ */
+        }
+        
+        .box-meeting {
+            background-color: #023768; /* สีพื้นหลังสำหรับ OBEC Meetings */
+        }
+        
+        .box-doc {
+            background-color: #00897b; /* สีพื้นหลังสำหรับ Smart OBEC */
+        }
+        
+        .box-time {
+            background-color: #b0bec5; /* สีพื้นหลังสำหรับ ระบบลางาน */
+            pointer-events: none; /* ทำให้ไม่สามารถคลิกได้ */
+            opacity: 0.5; /* ทำให้กล่องดูจางลงเมื่อไม่สามารถใช้งานได้ */
+        }
+        
         .box:hover {
-            transform: scale(1.05);
-            background-color: #024b54;
+            transform: scale(1.05); /* ขยายขนาดกล่องเมื่อมีการ hover */
         }
+        
+        .footer-text {
+            margin-top: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+            text-align: center; /* จัดข้อความให้กึ่งกลาง */
+        }
+        
 .popup {
     position: fixed;
     left: 0;
@@ -152,5 +208,11 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}   
+}  
+.disabled {
+    pointer-events: none; /* ปิดการใช้งานการคลิก */
+    opacity: 0.9; /* ทำให้จาง */
+    cursor: not-allowed; /* เปลี่ยนเคอร์เซอร์ให้เป็นรูปมือห้าม */
+} 
+
     </style>
